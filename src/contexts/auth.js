@@ -135,6 +135,97 @@ function AuthProvider({ children }) {
             });
     }
 
+    //Cadastrar usuário Comercial
+    async function signUpComercial(cnpj, razaoSocial, nomeFantasia, endereco, telefone, email, senha, qtdVagaCarro, qtdVagaMoto) {
+        setLoadingAuth(true);
+        await firebase.auth().createUserWithEmailAndPassword(email, senha)
+            .then(async (value) => {
+                let uid = value.user.uid;
+                await firebase.database().ref('users').child(uid).set({
+                    saldo: 0,
+                    nome: nomeFantasia,
+                    tipo: 'Estacionamento',
+                    locacao: 'Comercial',
+                    cnpj: cnpj,
+                    razaoSocial: razaoSocial, 
+                    endereco: endereco, 
+                    telefone: telefone, 
+                    qtdVagaCarro: qtdVagaCarro, 
+                    qtdVagaMoto: qtdVagaMoto
+
+                })
+                    .then(() => {
+                        let data = {
+                            uid: uid,
+                            nome: nomeFantasia,
+                            email: value.user.email,
+                            tipo: 'Estacionamento',
+                            veiculo: 'Comercial',
+                            cnpj: cnpj,
+                            razaoSocial: razaoSocial, 
+                            endereco: endereco, 
+                            telefone: telefone, 
+                            qtdVagaCarro: qtdVagaCarro, 
+                            qtdVagaMoto: qtdVagaMoto
+                            
+                        }
+                        setUser(data);
+                        storageUser(data);
+                        setLoadingAuth(false);
+                    })
+            })
+            .catch((error) => {
+                alert(error.code);
+                setLoadingAuth(false);
+            });
+    }
+
+    //Cadastrar usuário Resdencial
+    async function signUpResidencial(cpf, nome, rg, endereco, telefone, email, senha, qtdVagaCarro, qtdVagaMoto) {
+        setLoadingAuth(true);
+        await firebase.auth().createUserWithEmailAndPassword(email, senha)
+            .then(async (value) => {
+                let uid = value.user.uid;
+                await firebase.database().ref('users').child(uid).set({
+                    saldo: 0,
+                    nome: nome,
+                    tipo: 'Estacionamento',
+                    locacao: 'Residencial',
+                    cpf: cpf,
+                    rg: rg, 
+                    endereco: endereco, 
+                    telefone: telefone, 
+                    qtdVagaCarro: qtdVagaCarro, 
+                    qtdVagaMoto: qtdVagaMoto
+
+                })
+                    .then(() => {
+                        let data = {
+                            uid: uid,
+                            nome: nomeFantasia,
+                            email: value.user.email,
+                            tipo: 'Estacionamento',
+                            veiculo: 'Residencial',
+                            cpf: cpf,
+                            rg: rg, 
+                            endereco: endereco, 
+                            telefone: telefone, 
+                            qtdVagaCarro: qtdVagaCarro, 
+                            qtdVagaMoto: qtdVagaMoto
+                            
+                            
+                        }
+                        setUser(data);
+                        storageUser(data);
+                        setLoadingAuth(false);
+                    })
+            })
+            .catch((error) => {
+                alert(error.code);
+                setLoadingAuth(false);
+            });
+    }
+
     async function storageUser(data) {
         await AsyncStorage.setItem('Auth_user', JSON.stringify(data));
     }
@@ -148,7 +239,7 @@ function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, loading, loadingAuth, signUp, signUpMotocicleta, signIn, signOut }}>
+        <AuthContext.Provider value={{ signed: !!user, user, loading, loadingAuth, signUp, signUpMotocicleta, signUpComercial, signUpResidencial, signIn, signOut }}>
             {children}
         </AuthContext.Provider>
     );

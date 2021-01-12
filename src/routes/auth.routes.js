@@ -8,7 +8,7 @@ import Vehicles from '../pages/Vehicles';
 import Parking from '../pages/Parking';
 import carro from '../pages/SignUp/carro';
 import motocicleta from '../pages/SignUp/motocicleta';
-import domiciliar from '../pages/SignUp/domiciliar';
+import residencial from '../pages/SignUp/residencial';
 import comercial from '../pages/SignUp/comercial';
 
 
@@ -106,8 +106,8 @@ function AuthRoutes() {
             />
 
             <AuthStack.Screen
-                name='domiciliar'
-                component={domiciliar}
+                name='residencial'
+                component={residencial}
                 options={{
                     headerStyle: {
                         backgroundColor: '#131313',

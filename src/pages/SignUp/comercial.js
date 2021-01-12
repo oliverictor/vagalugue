@@ -13,18 +13,21 @@ import {
 
 export default function SignIn() {
 
-    const [nome, setNome] = useState('');
+    const [cnpj, setCnpj] = useState('');
+    const [razaoSocial, setRazaoSocial] = useState('');
+    const [nomeFantasia, setNomeFantasia] = useState('');
+    const [endereco, setEndereco] = useState('');
+    const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [marca, setMarca] = useState('');
-    const [modelo, setModelo] = useState('');
-    const [placa, setPlaca] = useState('');
+    const [senha, setSenha] = useState('');
+    const [qtdVagaCarro, setqtdVagaCarro] = useState('');
+    const [qtdVagaMoto, setqtdVagaMoto] = useState('');
 
-    const { signUp, loadingAuth } = useContext(AuthContext);
+    const { signUpComercial, loadingAuth } = useContext(AuthContext);
 
     function handleSignUp() {
-        signUp(email, password, nome, cpf, marca, modelo, placa);
+        
+        signUpComercial(cnpj, razaoSocial, nomeFantasia, endereco, telefone, email, senha, qtdVagaCarro, qtdVagaMoto);
     }
 
     return (
@@ -33,14 +36,53 @@ export default function SignIn() {
                 behavior={Platform.OS === 'ios' ? 'padding' : ''}
                 enabled
             >
+                <AreaInput>
+                    <Input
+                        placeholder='CNPJ'
+                        autoCorrect={false}
+                        autoCapitalize='none'
+                        value={cnpj}
+                        onChangeText={(text) => setCnpj(text)}
+                    />
+                </AreaInput>
 
                 <AreaInput>
                     <Input
-                        placeholder='Nome'
+                        placeholder='Razão Social'
                         autoCorrect={false}
                         autoCapitalize='none'
-                        value={nome}
-                        onChangeText={(text) => setNome(text)}
+                        value={razaoSocial}
+                        onChangeText={(text) => setRazaoSocial(text)}
+                    />
+                </AreaInput>
+
+                <AreaInput>
+                    <Input
+                        placeholder='Nome Fantasia'
+                        autoCorrect={false}
+                        autoCapitalize='none'
+                        value={nomeFantasia}
+                        onChangeText={(text) => setNomeFantasia(text)}
+                    />
+                </AreaInput>
+
+                <AreaInput>
+                    <Input
+                        placeholder='Endereço'
+                        autoCorrect={false}
+                        autoCapitalize='none'
+                        value={endereco}
+                        onChangeText={(text) => setEndereco(text)}
+                    />
+                </AreaInput>
+
+                <AreaInput>
+                    <Input
+                        placeholder='Telefone'
+                        autoCorrect={false}
+                        autoCapitalize='none'
+                        value={telefone}
+                        onChangeText={(text) => setTelefone(text)}
                     />
                 </AreaInput>
 
@@ -54,58 +96,36 @@ export default function SignIn() {
                     />
                 </AreaInput>
 
-
                 <AreaInput>
                     <Input
                         placeholder='Senha'
                         autoCorrect={false}
                         autoCapitalize='none'
-                        value={password}
-                        onChangeText={(text) => setPassword(text)}
+                        value={senha}
+                        onChangeText={(text) => setSenha(text)}
                         secureTextEntry={true}
                     />
                 </AreaInput>
 
                 <AreaInput>
                     <Input
-                        placeholder='CPF'
+                        placeholder='Quantidade Vagas Carro'
                         autoCorrect={false}
                         autoCapitalize='none'
-                        value={cpf}
-                        onChangeText={(text) => setCpf(text)}
+                        value={qtdVagaCarro}
+                        onChangeText={(text) => setqtdVagaCarro(text)}
                     />
                 </AreaInput>
 
                 <AreaInput>
                     <Input
-                        placeholder='Marca'
+                        placeholder='Quantidade Vagas Motocicleta'
                         autoCorrect={false}
                         autoCapitalize='none'
-                        value={marca}
-                        onChangeText={(text) => setMarca(text)}
+                        value={qtdVagaMoto}
+                        onChangeText={(text) => setqtdVagaMoto(text)}
                     />
                 </AreaInput>
-
-                <AreaInput>
-                    <Input
-                        placeholder='Modelo'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={modelo}
-                        onChangeText={(text) => setModelo(text)}
-                    />
-                </AreaInput>
-
-                <AreaInput>
-                    <Input
-                        placeholder='Placa'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={placa}
-                        onChangeText={(text) => setPlaca(text)}
-                    />
-                </AreaInput>
-
 
                 <SubmitButton onPress={handleSignUp}>
                     {

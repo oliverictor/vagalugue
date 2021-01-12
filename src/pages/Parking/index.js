@@ -16,11 +16,11 @@ export default function Parking() {
             </HeaderView>
 
             <IconView>
-                <IconBt onPress={() => navigation.navigate('carro')} >
+                <IconBt onPress={() => navigation.navigate('comercial')} >
                     <IconImage source={require('../../assets/Estacionamento.png')} />
                 </IconBt>
 
-                <IconBt onPress={() => navigation.navigate('motocicleta')}>
+                <IconBt onPress={() => navigation.navigate('residencial')}>
                     <IconImage source={require('../../assets/Estacionamento.png')} />
                 </IconBt>
             </IconView>
