@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { Container, TypeTitle, TypeDescription, TypeImage, RequestButton, RequestButtonText } from './styles';
-import uberx from '../../assets/uberx.png';
+import logo from '../../assets/uberx.png';
 
 export default class Details extends Component {
     render() {
         return (
             <Container>
-                <TypeTitle>Popular</TypeTitle>
-                <TypeDescription>Viagens baratsd para o dia a dia</TypeDescription>
+                <TypeTitle>Vagalugue</TypeTitle>
+                <TypeDescription>Procure o estacionamento mais próximo!</TypeDescription>
 
-                <TypeImage source={uberx} />
-                <TypeTitle>UberX</TypeTitle>
-                <TypeDescription>R$6,00</TypeDescription>
+                <TypeImage source={logo} />
+                <TypeTitle>Segurança e flexibilidade</TypeTitle>
+                <TypeDescription>O jeito mais fácil de se encontrar um vaga</TypeDescription>
 
                 <RequestButton onPress={() => { }}>
-                    <RequestButtonText>SOLICITAR UBERX</RequestButtonText>
+                    <RequestButtonText>Entre em contato via whatsApp</RequestButtonText>
                 </RequestButton>
             </Container>
         );

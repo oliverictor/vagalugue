@@ -6,23 +6,61 @@ import Search from '../Search';
 import Directions from '../Directions';
 import { getPixelSize } from '../../../utils';
 import markerImage from '../../assets/marker.png';
-import { Back, LocationBox, LocationText, LocationTimeBox, LocationTimeText, LocationTimeTextSmall } from './styles';
+import { Back } from './styles';
 import Geocoder from 'react-native-geocoding';
 import Details from '../Details';
-import backImage from '../../assets/back.png'; 
+import backImage from '../../assets/back.png';
+import firebase from '../../services/firebaseConnection';
+import residencial from '../../assets/garagem1icone.png';
+import comercial from '../../assets/garagem2icone.png';
 
-Geocoder.init('AIzaSyAA_RcxoOVqR6pWt59m9gjJuVIwHGs9sRU')
+Geocoder.init('AIzaSyDLftFbnJGAhSBeBxpnBORJKZCz34ur2Z4')
 
 export default class Map extends Component {
 
-    state = {
-        region: null,
-        destination: null,
-        duration: null,
-        location: null,
+    constructor(props) {
+        super(props);
+        this.state = {
+            region: null,
+            destination: null,
+            duration: null,
+            location: null,
+            markers: [],
+        }
     }
 
+
+
     async componentDidMount() {
+        var that = this;
+        firebase.database().ref("users").on('value', function (snapshot) {
+            var auxMarkers = [];
+            snapshot.forEach(element => {
+                var local = element.val().local;
+                var nome = element.val().nome;
+                var locacao = element.val().locacao
+                if (local != null) {
+                    Geocoder.from(local).then(json => {
+                        let location = json.results[0].geometry.location;
+                        auxMarkers.push({
+                            title: nome,
+                            locacao: locacao,
+                            coordinates: {
+                                latitude: location.lat,
+                                longitude: location.lng,
+                            }
+                        });
+
+                    });
+
+                }
+            });
+            that.setState({
+                markers: auxMarkers
+            });
+
+        });
+
         Geolocation.getCurrentPosition(
             async ({ coords: { latitude, longitude } }) => {
                 const response = await Geocoder.from({ latitude, longitude });
@@ -64,13 +102,10 @@ export default class Map extends Component {
     handleBack = () => {
         this.setState({ destination: null });
     }
-
     render() {
-
-        const { region, destination, duration, location } = this.state;
-
+        const { region, destination, duration, location, markers } = this.state;
         return (
-            <View style={{ flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <MapView
                     style={{ flex: 1 }}
                     region={region}
@@ -78,6 +113,20 @@ export default class Map extends Component {
                     loadingEnabled
                     ref={el => this.mapView = el}
                 >
+
+                    {
+                        this.state.markers.map((marker, index) => (
+                            <Marker
+                                key={index}
+                                coordinate={marker.coordinates}
+                                title={marker.title}
+                                image={marker.locacao === "Comercial" ? comercial : residencial}
+                                onPress={event => this.setState({ destination: event.nativeEvent.coordinate })}
+                            />
+                        ))
+
+                    }
+
                     {destination && (
                         <Fragment>
                             <Directions
@@ -95,17 +144,17 @@ export default class Map extends Component {
                                     });
                                 }}
                             />
-                            <Marker
+                             <Marker
                                 coordinate={destination}
                                 anchor={{ x: 0, y: 0 }}
                                 image={markerImage}
                             >
-                                <LocationBox>
+                               {/* <LocationBox>
                                     <LocationText>{destination.title}</LocationText>
-                                </LocationBox>
+                                </LocationBox> */}
                             </Marker>
 
-                            <Marker
+                            {/* <Marker
                                 coordinate={region}
                                 anchor={{ x: 0, y: 0 }}
                             >
@@ -116,7 +165,7 @@ export default class Map extends Component {
                                     </LocationTimeBox>
                                     <LocationText>{location}</LocationText>
                                 </LocationBox>
-                            </Marker>
+                            </Marker> */}
                         </Fragment>
                     )}
 
@@ -127,7 +176,7 @@ export default class Map extends Component {
                         <Back onPress={this.handleBack}>
                             <Image source={backImage} />
                         </Back>
-                        <Details />
+                        {/* <Details /> */}
                     </Fragment>
                 ) : (
                         <Search onLocationSelected={this.handleLocationSelected} />

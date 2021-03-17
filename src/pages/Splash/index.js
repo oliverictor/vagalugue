@@ -13,8 +13,7 @@ export default class Splash extends Component {
     render() {
         return (
             <Background>
-                <Logo source={require('../../assets/Logo.png')} />
-                <TextLogo>Vagalugue</TextLogo>
+                <Logo source={require('../../assets/vagalugueSplash.png')} />
             </Background>
         );
     }

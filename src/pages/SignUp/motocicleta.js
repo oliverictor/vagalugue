@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Platform, ActivityIndicator } from 'react-native';
+import { Platform, ActivityIndicator, ScrollView } from 'react-native';
 import { AuthContext } from '../../contexts/auth';
 
 import {
@@ -28,96 +28,98 @@ export default function SignIn() {
     }
 
     return (
-        <Background>
-            <Container
-                behavior={Platform.OS === 'ios' ? 'padding' : ''}
-                enabled
-            >
+        <ScrollView>
+            <Background>
+                <Container
+                    behavior={Platform.OS === 'ios' ? 'padding' : ''}
+                    enabled
+                >
 
-                <AreaInput>
-                    <Input
-                        placeholder='Nome'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={nome}
-                        onChangeText={(text) => setNome(text)}
-                    />
-                </AreaInput>
+                    <AreaInput>
+                        <Input
+                            placeholder='Nome'
+                            autoCorrect={false}
+                            autoCapitalize='none'
+                            value={nome}
+                            onChangeText={(text) => setNome(text)}
+                        />
+                    </AreaInput>
 
-                <AreaInput>
-                    <Input
-                        placeholder='Email'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={email}
-                        onChangeText={(text) => setEmail(text)}
-                    />
-                </AreaInput>
-
-
-                <AreaInput>
-                    <Input
-                        placeholder='Senha'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={password}
-                        onChangeText={(text) => setPassword(text)}
-                        secureTextEntry={true}
-                    />
-                </AreaInput>
-
-                <AreaInput>
-                    <Input
-                        placeholder='CPF'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={cpf}
-                        onChangeText={(text) => setCpf(text)}
-                    />
-                </AreaInput>
-
-                <AreaInput>
-                    <Input
-                        placeholder='Marca'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={marca}
-                        onChangeText={(text) => setMarca(text)}
-                    />
-                </AreaInput>
-
-                <AreaInput>
-                    <Input
-                        placeholder='Modelo'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={modelo}
-                        onChangeText={(text) => setModelo(text)}
-                    />
-                </AreaInput>
-
-                <AreaInput>
-                    <Input
-                        placeholder='Placa'
-                        autoCorrect={false}
-                        autoCapitalize='none'
-                        value={placa}
-                        onChangeText={(text) => setPlaca(text)}
-                    />
-                </AreaInput>
+                    <AreaInput>
+                        <Input
+                            placeholder='Email'
+                            autoCorrect={false}
+                            autoCapitalize='none'
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
+                        />
+                    </AreaInput>
 
 
-                <SubmitButton onPress={handleSignUp}>
-                    {
-                        loadingAuth ? (
-                            <ActivityIndicator size={20} color='#FFF' />
-                        ) : (
+                    <AreaInput>
+                        <Input
+                            placeholder='Senha'
+                            autoCorrect={false}
+                            autoCapitalize='none'
+                            value={password}
+                            onChangeText={(text) => setPassword(text)}
+                            secureTextEntry={true}
+                        />
+                    </AreaInput>
+
+                    <AreaInput>
+                        <Input
+                            placeholder='CPF'
+                            autoCorrect={false}
+                            autoCapitalize='none'
+                            value={cpf}
+                            onChangeText={(text) => setCpf(text)}
+                        />
+                    </AreaInput>
+
+                    <AreaInput>
+                        <Input
+                            placeholder='Marca'
+                            autoCorrect={false}
+                            autoCapitalize='none'
+                            value={marca}
+                            onChangeText={(text) => setMarca(text)}
+                        />
+                    </AreaInput>
+
+                    <AreaInput>
+                        <Input
+                            placeholder='Modelo'
+                            autoCorrect={false}
+                            autoCapitalize='none'
+                            value={modelo}
+                            onChangeText={(text) => setModelo(text)}
+                        />
+                    </AreaInput>
+
+                    <AreaInput>
+                        <Input
+                            placeholder='Placa'
+                            autoCorrect={false}
+                            autoCapitalize='none'
+                            value={placa}
+                            onChangeText={(text) => setPlaca(text)}
+                        />
+                    </AreaInput>
+
+
+                    <SubmitButton onPress={handleSignUp}>
+                        {
+                            loadingAuth ? (
+                                <ActivityIndicator size={20} color='#FFF' />
+                            ) : (
                                 <SubmitText>Cadastrar</SubmitText>
                             )
-                    }
-                </SubmitButton>
+                        }
+                    </SubmitButton>
 
-            </Container>
-        </Background>
+                </Container>
+            </Background>
+        </ScrollView>
     );
 }

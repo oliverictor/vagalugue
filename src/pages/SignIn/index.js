@@ -32,7 +32,7 @@ export default function SignIn() {
                 behavior={Platform.OS === 'ios' ? 'padding' : ''}
                 enabled
             >
-                <Logo source={require('../../assets/Logo.png')} />
+                <Logo source={require('../../assets/vagalugueStartMenuLogo.png')} />
 
                 <AreaInput>
                     <Input

@@ -136,23 +136,21 @@ function AuthProvider({ children }) {
     }
 
     //Cadastrar usuário Comercial
-    async function signUpComercial(cnpj, razaoSocial, nomeFantasia, endereco, telefone, email, senha, qtdVagaCarro, qtdVagaMoto) {
-        setLoadingAuth(true);
+    async function signUpComercial(cnpj, razaoSocial, nomeFantasia, endereco, numero, bairro, cidade, estado, telefone, email, senha, qtdVagaCarro, qtdVagaMoto) {
+        setLoadingAuth(true);            
         await firebase.auth().createUserWithEmailAndPassword(email, senha)
             .then(async (value) => {
                 let uid = value.user.uid;
                 await firebase.database().ref('users').child(uid).set({
-                    saldo: 0,
                     nome: nomeFantasia,
                     tipo: 'Estacionamento',
                     locacao: 'Comercial',
                     cnpj: cnpj,
                     razaoSocial: razaoSocial, 
-                    endereco: endereco, 
+                    local: endereco + ', ' + numero + ' - ' + bairro + ', ' + cidade + ' - ' + estado,
                     telefone: telefone, 
                     qtdVagaCarro: qtdVagaCarro, 
-                    qtdVagaMoto: qtdVagaMoto
-
+                    qtdVagaMoto: qtdVagaMoto,
                 })
                     .then(() => {
                         let data = {
@@ -160,14 +158,13 @@ function AuthProvider({ children }) {
                             nome: nomeFantasia,
                             email: value.user.email,
                             tipo: 'Estacionamento',
-                            veiculo: 'Comercial',
+                            locacao: 'Comercial',
                             cnpj: cnpj,
                             razaoSocial: razaoSocial, 
-                            endereco: endereco, 
+                            local: endereco + ', ' + numero + ' - ' + bairro + ', ' + cidade + ' - ' + estado, 
                             telefone: telefone, 
                             qtdVagaCarro: qtdVagaCarro, 
-                            qtdVagaMoto: qtdVagaMoto
-                            
+                            qtdVagaMoto: qtdVagaMoto, 
                         }
                         setUser(data);
                         storageUser(data);
@@ -180,20 +177,19 @@ function AuthProvider({ children }) {
             });
     }
 
-    //Cadastrar usuário Resdencial
-    async function signUpResidencial(cpf, nome, rg, endereco, telefone, email, senha, qtdVagaCarro, qtdVagaMoto) {
+    //Cadastrar usuário Residencial
+    async function signUpResidencial(cpf, nome, rg, endereco, numero, bairro, cidade, estado, telefone, email, senha, qtdVagaCarro, qtdVagaMoto) {
         setLoadingAuth(true);
         await firebase.auth().createUserWithEmailAndPassword(email, senha)
             .then(async (value) => {
                 let uid = value.user.uid;
                 await firebase.database().ref('users').child(uid).set({
-                    saldo: 0,
                     nome: nome,
                     tipo: 'Estacionamento',
                     locacao: 'Residencial',
                     cpf: cpf,
                     rg: rg, 
-                    endereco: endereco, 
+                    local: endereco + ', ' + numero + ' - ' + bairro + ', ' + cidade + ' - ' + estado, 
                     telefone: telefone, 
                     qtdVagaCarro: qtdVagaCarro, 
                     qtdVagaMoto: qtdVagaMoto
@@ -202,18 +198,16 @@ function AuthProvider({ children }) {
                     .then(() => {
                         let data = {
                             uid: uid,
-                            nome: nomeFantasia,
+                            nome: nome,
                             email: value.user.email,
                             tipo: 'Estacionamento',
-                            veiculo: 'Residencial',
+                            locacao: 'Residencial',
                             cpf: cpf,
                             rg: rg, 
-                            endereco: endereco, 
+                            local: endereco + ', ' + numero + ' - ' + bairro + ', ' + cidade + ' - ' + estado,
                             telefone: telefone, 
                             qtdVagaCarro: qtdVagaCarro, 
-                            qtdVagaMoto: qtdVagaMoto
-                            
-                            
+                            qtdVagaMoto: qtdVagaMoto                            
                         }
                         setUser(data);
                         storageUser(data);

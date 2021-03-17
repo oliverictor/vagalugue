@@ -14,7 +14,7 @@ export default class Search extends Component {
                 placeholderTextColor="#333"
                 onPress={onLocationSelected}
                 query={{
-                    key: 'AIzaSyAA_RcxoOVqR6pWt59m9gjJuVIwHGs9sRU',
+                    key: 'AIzaSyDLftFbnJGAhSBeBxpnBORJKZCz34ur2Z4',
                     language: 'pt'
                 }}
                 textInputProps={{
@@ -26,7 +26,7 @@ export default class Search extends Component {
                 styles={{
                     container: {
                         position: 'absolute',
-                        top: Platform.select({ ios: 60, android: 40 }),
+                        top: Platform.select({ ios: 60, android: 60 }),
                         width: '100%'
                     },
                     textInputContainer: {

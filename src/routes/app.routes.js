@@ -28,9 +28,9 @@ function AppRoutes() {
                 }
             }}
         >
-            <AppDrawer.Screen name='Home' component={Home} />
-            <AppDrawer.Screen name='Registrar' component={New} />
-            <AppDrawer.Screen name='Perfil' component={Profile} />
+            <AppDrawer.Screen name='Home' component={Home} options={{ headerShown: true }}/>
+            <AppDrawer.Screen name='Registrar' component={New} options={{ headerShown: true }}/>
+            <AppDrawer.Screen name='Perfil' component={Profile} options={{ headerShown: true }}/>
         </AppDrawer.Navigator>
     );
 }
