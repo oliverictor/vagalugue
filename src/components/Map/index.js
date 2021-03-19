@@ -8,7 +8,6 @@ import { getPixelSize } from '../../../utils';
 import markerImage from '../../assets/marker.png';
 import { Back } from './styles';
 import Geocoder from 'react-native-geocoding';
-import Details from '../Details';
 import backImage from '../../assets/back.png';
 import firebase from '../../services/firebaseConnection';
 import residencial from '../../assets/garagem1icone.png';
@@ -38,13 +37,19 @@ export default class Map extends Component {
             snapshot.forEach(element => {
                 var local = element.val().local;
                 var nome = element.val().nome;
-                var locacao = element.val().locacao
+                var locacao = element.val().locacao;
+                var carro = element.val().qtdVagaCarro;
+                var moto = element.val().qtdVagaMoto;
+                var telefone = element.val().telefone;
                 if (local != null) {
                     Geocoder.from(local).then(json => {
                         let location = json.results[0].geometry.location;
                         auxMarkers.push({
                             title: nome,
                             locacao: locacao,
+                            carro: carro, 
+                            moto: moto,
+                            telefone: telefone,
                             coordinates: {
                                 latitude: location.lat,
                                 longitude: location.lng,
@@ -102,8 +107,17 @@ export default class Map extends Component {
     handleBack = () => {
         this.setState({ destination: null });
     }
+
+    handleOnPress = (event, marker) => {
+        this.setState({ destination: event.nativeEvent.coordinate });
+        alert("\nEstacionameto: " + marker.title +
+              "\n\nTipo: " + marker.locacao + 
+              "\n\nQuantidade de vagas disponíveis para carro: " + marker.carro + 
+              "\n\nQuantidade de vagas disponíveis para moto: " + marker.moto +
+              "\n\nAgende sua vaga pelo telefone: " + marker.telefone); 
+    }
     render() {
-        const { region, destination, duration, location, markers } = this.state;
+        const { region, destination } = this.state;
         return (
             <View style={{ flex: 1 }}>
                 <MapView
@@ -121,7 +135,7 @@ export default class Map extends Component {
                                 coordinate={marker.coordinates}
                                 title={marker.title}
                                 image={marker.locacao === "Comercial" ? comercial : residencial}
-                                onPress={event => this.setState({ destination: event.nativeEvent.coordinate })}
+                                onPress={event => this.handleOnPress(event, marker)}
                             />
                         ))
 
@@ -144,28 +158,12 @@ export default class Map extends Component {
                                     });
                                 }}
                             />
-                             <Marker
+                            <Marker
                                 coordinate={destination}
                                 anchor={{ x: 0, y: 0 }}
                                 image={markerImage}
                             >
-                               {/* <LocationBox>
-                                    <LocationText>{destination.title}</LocationText>
-                                </LocationBox> */}
                             </Marker>
-
-                            {/* <Marker
-                                coordinate={region}
-                                anchor={{ x: 0, y: 0 }}
-                            >
-                                <LocationBox>
-                                    <LocationTimeBox>
-                                        <LocationTimeText>{duration}</LocationTimeText>
-                                        <LocationTimeTextSmall>MIN</LocationTimeTextSmall>
-                                    </LocationTimeBox>
-                                    <LocationText>{location}</LocationText>
-                                </LocationBox>
-                            </Marker> */}
                         </Fragment>
                     )}
 
@@ -176,11 +174,10 @@ export default class Map extends Component {
                         <Back onPress={this.handleBack}>
                             <Image source={backImage} />
                         </Back>
-                        {/* <Details /> */}
                     </Fragment>
                 ) : (
-                        <Search onLocationSelected={this.handleLocationSelected} />
-                    )}
+                    <Search onLocationSelected={this.handleLocationSelected} />
+                )}
 
             </View>
         );
