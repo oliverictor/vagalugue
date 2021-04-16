@@ -37,7 +37,7 @@ function AuthRoutes() {
                     headerStyle: {
                         backgroundColor: '#131313',
                         borderBottomWidth: 1,
-                        borderBottomColor: '#00B94A'
+                        borderBottomColor: '#5fbff9'
                     },
                     headerTintColor: '#FFF',
                     headerBackTitleVisible: false,
@@ -52,7 +52,7 @@ function AuthRoutes() {
                     headerStyle: {
                         backgroundColor: '#131313',
                         borderBottomWidth: 1,
-                        borderBottomColor: '#00B94A'
+                        borderBottomColor: '#5fbff9'
                     },
                     headerTintColor: '#FFF',
                     headerBackTitleVisible: false,
@@ -67,7 +67,7 @@ function AuthRoutes() {
                     headerStyle: {
                         backgroundColor: '#131313',
                         borderBottomWidth: 1,
-                        borderBottomColor: '#00B94A'
+                        borderBottomColor: '#5fbff9'
                     },
                     headerTintColor: '#FFF',
                     headerBackTitleVisible: false,
@@ -82,7 +82,7 @@ function AuthRoutes() {
                     headerStyle: {
                         backgroundColor: '#131313',
                         borderBottomWidth: 1,
-                        borderBottomColor: '#00B94A'
+                        borderBottomColor: '#5fbff9'
                     },
                     headerTintColor: '#FFF',
                     headerBackTitleVisible: false,
@@ -97,7 +97,7 @@ function AuthRoutes() {
                     headerStyle: {
                         backgroundColor: '#131313',
                         borderBottomWidth: 1,
-                        borderBottomColor: '#00B94A'
+                        borderBottomColor: '#5fbff9'
                     },
                     headerTintColor: '#FFF',
                     headerBackTitleVisible: false,
@@ -112,7 +112,7 @@ function AuthRoutes() {
                     headerStyle: {
                         backgroundColor: '#131313',
                         borderBottomWidth: 1,
-                        borderBottomColor: '#00B94A'
+                        borderBottomColor: '#5fbff9'
                     },
                     headerTintColor: '#FFF',
                     headerBackTitleVisible: false,
@@ -127,7 +127,7 @@ function AuthRoutes() {
                     headerStyle: {
                         backgroundColor: '#131313',
                         borderBottomWidth: 1,
-                        borderBottomColor: '#00B94A'
+                        borderBottomColor: '#5fbff9'
                     },
                     headerTintColor: '#FFF',
                     headerBackTitleVisible: false,

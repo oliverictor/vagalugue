@@ -1,7 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from '../pages/Home';
-import New from '../pages/New';
 import Profile from '../pages/Profile';
 import CustomDrawer from '../components/CustomDrawer';
 
@@ -20,7 +19,7 @@ function AppRoutes() {
                     fontWeight: 'bold'
                 },
                 activeTintColor: '#FFF',
-                activeBackgroundColor: '#00B94A',
+                activeBackgroundColor: '#5fbff9',
                 inactiveBackgroundColor: '#000',
                 inactiveTintColor: '#DDD',
                 itemStyle: {
@@ -29,7 +28,6 @@ function AppRoutes() {
             }}
         >
             <AppDrawer.Screen name='Home' component={Home} options={{ headerShown: true }}/>
-            <AppDrawer.Screen name='Registrar' component={New} options={{ headerShown: true }}/>
             <AppDrawer.Screen name='Perfil' component={Profile} options={{ headerShown: true }}/>
         </AppDrawer.Navigator>
     );

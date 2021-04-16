@@ -44,6 +44,10 @@ function AuthProvider({ children }) {
                             marca: snapshot.val().marca,
                             modelo: snapshot.val().modelo,
                             placa: snapshot.val().placa,
+                            local: snapshot.val().local,
+                            qtdVagaCarro:  snapshot.val().qtdVagaCarro, 
+                            qtdVagaMoto: snapshot.val().qtdVagaMoto, 
+                            locacao:  snapshot.val().locacao,
                         };
 
                         setUser(data);
