@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Alert, TouchableOpacity, Platform } from 'react-native';
 import firebase from '../../services/firebaseConnection';
 import { format, isBefore } from 'date-fns';
+import { useNavigation } from '@react-navigation/native';
 
 import { AuthContext } from '../../contexts/auth';
 import HistoricoList from '../../components/HistoricoList';
@@ -15,6 +16,7 @@ import { Background, Container, Nome, Saldo, Title, List, Area } from './styles'
 export default function Home() {
   const [historico, setHistorico] = useState([]);
   const [saldo, setSaldo] = useState(0);
+  const navigation = useNavigation();
 
   const { user } = useContext(AuthContext);
   const uid = user && user.uid;
@@ -122,7 +124,7 @@ export default function Home() {
 
   return (
     <Background>
-      <Map />
+            <Map />
     </Background>
   );
 }

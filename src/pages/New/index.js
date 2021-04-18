@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import firebase from '../../services/firebaseConnection'
 import Header from '../../components/Header';
-import { Background, Input, SubmitButton, SubmitText } from './styles'
+import { Background, Input, SubmitButton, SubmitText, TituloView, TituloText } from './styles'
 import Picker from '../../components/Picker';
 import { AuthContext } from '../../contexts/auth'
 
@@ -12,7 +12,7 @@ export default function New() {
 
   const navigation = useNavigation();
   const [valor, setValor] = useState('');
-  const [tipo, setTipo] = useState('receita');
+  const [tipo, setTipo] = useState('carro');
   const { user: usuario } = useContext(AuthContext);
 
   function handleSubmit() {
@@ -42,36 +42,30 @@ export default function New() {
   async function handleAdd() {
     let uid = usuario.uid;
 
-    let key = await (await firebase.database().ref('historico').child(uid).push()).key;
-    await firebase.database().ref('historico').child(uid).child(key).set({
-      tipo: tipo,
-      valor: parseFloat(valor),
-      date: format(new Date(), 'dd/MM/yyyy')
-    })
-
     //atuaizar o nosso saldo 
     let user = firebase.database().ref('users').child(uid);
-    await user.once('value').then((snapshot) => {
-      let saldo = parseFloat(snapshot.val().saldo);
+    await user.once('value').then(() => {
 
-      tipo === 'despesa' ? saldo -= parseFloat(valor) : saldo += parseFloat(valor);
+      tipo === 'carro' ? user.child('qtdVagaCarro').set(parseFloat(valor)) : user.child('qtdVagaMoto').set(parseFloat(valor));
 
-      user.child('saldo').set(saldo);
     });
 
     Keyboard.dismiss();
     setValor('');
     navigation.navigate('Home');
-    
   }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Background>
 
+        <TituloView>
+          <TituloText>Gerenciador de Vagas</TituloText>
+        </TituloView>
+
         <SafeAreaView style={{ alignItems: 'center' }}>
           <Input
-            placeholder='Valor desejado'
+            placeholder='Insira a quantidade disponível no momento'
             keyboardType='numeric'
             returnKeyType='next'
             onSubmitEditing={() => Keyboard.dismiss()}

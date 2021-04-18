@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from '../pages/Home';
+import New from '../pages/New';
 import Profile from '../pages/Profile';
 import CustomDrawer from '../components/CustomDrawer';
+import { AuthContext } from '../contexts/auth';
 
-const AppDrawer = createDrawerNavigator();
+export default function AppRoutes() {
 
-function AppRoutes() {
+    const AppDrawer = createDrawerNavigator();
+    const { user } = useContext(AuthContext);
+
     return (
         <AppDrawer.Navigator
             drawerContent={(props) => <CustomDrawer {...props} />}
-            
+
             drawerStyle={{
                 backgroundColor: '#171717'
             }}
@@ -27,10 +31,10 @@ function AppRoutes() {
                 }
             }}
         >
-            <AppDrawer.Screen name='Home' component={Home} options={{ headerShown: true }}/>
-            <AppDrawer.Screen name='Perfil' component={Profile} options={{ headerShown: true }}/>
+            {user && user.tipo === 'Condutor' ?
+                <AppDrawer.Screen name='Home' component={Home} options={{ headerShown: true }} /> :
+                <AppDrawer.Screen name='Home' component={New} options={{ headerShown: true }} />}
+            <AppDrawer.Screen name='Perfil' component={Profile} options={{ headerShown: true }} />
         </AppDrawer.Navigator>
     );
 }
-
-export default AppRoutes; 

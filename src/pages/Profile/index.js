@@ -16,17 +16,17 @@ export default function Profile() {
             </NameView>
 
             <IconView>
-                {user.veiculo === 'Carro' ? <FontAwesome5 name="car" size={90} /> : null}
-                {user.veiculo === 'Moto' ? <Fontisto name="motorcycle" size={93} /> : null}
-                {user.locacao === 'Comercial' ? <Icon source={require('../../assets/garagem2icone.png')} /> : null}
-                {user.locacao === 'Residencial' ? <Icon source={require('../../assets/garagem1icone.png')} /> : null}
+                {user && user.veiculo === 'Carro' ? <FontAwesome5 name="car" size={90} /> : null}
+                {user && user.veiculo === 'Motocicleta' ? <Fontisto name="motorcycle" size={93} /> : null}
+                {user && user.locacao === 'Comercial' ? <Icon source={require('../../assets/garagem2icone.png')} /> : null}
+                {user && user.locacao === 'Residencial' ? <Icon source={require('../../assets/garagem1icone.png')} /> : null}
             </IconView>
 
             <ListView>
-            {user.tipo === 'Condutor' ? <ListText>Tipo: {user && user.veiculo}</ListText> : <ListText>Tipo: {user && user.locacao}</ListText>} 
-            {user.tipo === 'Condutor' ? <ListText>Placa: {user && user.placa}</ListText> : null} 
-            {user.tipo === 'Condutor' ? <ListText>Marca: {user && user.marca}</ListText> : <ListText>Quantidade de vagas para carro: {user && user.qtdVagaCarro}</ListText>} 
-            {user.tipo === 'Condutor' ? <ListText>Modelo: {user && user.modelo}</ListText> : <ListText>Quantidade de vagas para moto: {user && user.qtdVagaMoto}</ListText>} 
+            {user && user.tipo === 'Condutor' ? <ListText>Tipo: {user.veiculo}</ListText> : <ListText>Tipo: {user.locacao}</ListText>} 
+            {user && user.tipo === 'Condutor' ? <ListText>Placa: {user.placa}</ListText> : null} 
+            {user && user.tipo === 'Condutor' ? <ListText>Marca: {user.marca}</ListText> : <ListText>Quantidade de vagas para carro: {user.qtdVagaCarro}</ListText>} 
+            {user && user.tipo === 'Condutor' ? <ListText>Modelo: {user.modelo}</ListText> : <ListText>Quantidade de vagas para moto: {user.qtdVagaMoto}</ListText>} 
             </ListView>
         </Container>
     );

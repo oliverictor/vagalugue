@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Background = styled.View`
 flex: 1; 
-background-color: #131313;
+background-color: #5fbff9;
 `;
 
 export const Input = styled.TextInput.attrs({
@@ -28,4 +28,16 @@ export const SubmitText = styled.Text`
 font-size: 21px; 
 font-weight: bold; 
 color: #FFF;
+`;
+
+export const TituloView = styled.View`
+align-items: center;
+margin-bottom: 70;
+`;
+
+export const TituloText = styled.Text`
+text-align: center;
+font-size: 40px;
+color: rgba(255,255,255,1);
+font-weight: bold; 
 `;
